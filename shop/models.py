@@ -1,12 +1,17 @@
 from django.db import models
 
-# Create your models here.
 class Product(models.Model):
-    name = models.CharField(max_length=200)
-    price = models.PositiveIntegerField()
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.PositiveIntegerField(default=0)  # Добавлено поле для количества
+
+    def __str__(self):  # Исправлено название метода на __str__
+        return self.name
 
 class Purchase(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    person = models.CharField(max_length=200)
-    address = models.CharField(max_length=200)
-    date = models.DateTimeField(auto_now_add=True)
+    person = models.CharField(max_length=100)
+    address = models.TextField()
+
+    def __str__(self):  # Исправлено название метода на __str__
+        return f'Purchase of {self.product.name} by {self.person}'

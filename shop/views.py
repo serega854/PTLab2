@@ -18,4 +18,3 @@ class PurchaseCreate(CreateView):
     def form_valid(self, form):
         self.object = form.save()
         return HttpResponse(f'Спасибо за покупку, {self.object.person}!')
-

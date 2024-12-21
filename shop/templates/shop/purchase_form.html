@@ -1,28 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Покупка</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff8e1; /* Светлый желтый фон */
+            color: #5d3f00; /* Темный коричневый цвет текста */
+            margin: 0;
+            padding: 20px;
+        }
+        h3 {
+            text-align: center;
+            color: #ffb300; /* Ярко-желтый цвет заголовка */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #fffde7; /* Очень светлый желтый фон для четных строк */
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ffcc00; /* Желтая граница для полей ввода */
+            border-radius: 4px; /* Скругленные углы */
+        }
+        input[type="submit"] {
+            background-color: #ffb300; /* Ярко-желтая кнопка */
+            color: white; /* Белый текст на кнопке */
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px; /* Скругленные углы */
+            cursor: pointer; /* Курсор при наведении */
+        }
+        input[type="submit"]:hover {
+            background-color: #ffa000; /* Темнее при наведении */
+        }
+    </style>
 </head>
 <body>
     <div>
         <h3>Покупка</h3>
         <form method="post">{% csrf_token %}
-            <input type="hidden" value="{{ view.kwargs.product_id }}" name="product" />
-            <table>
-                <tr>
-                    <td><p>Введите свое имя </p></td>
-                    <td><input type="text" name="person" /> </td>
-                </tr>
-                <tr>
-                    <td><p>Введите адрес доставки:</p></td>
-                    <td>
-                        <input type="text" name="address" />
-                    </td>
-                </tr>
-                <tr><td><input type="submit" value="Отправить" /> </td><td></td></tr>
-            </table>
+            <p>Выберите товары:</p>
+            {% for product in products %}
+                <label>
+                    <input type="checkbox" name="products" value="{{ product.id }}" /> {{ product.name }} - {{ product.price }} руб.
+                </label><br />
+            {% endfor %}
+            <p>Введите свое имя:</p>
+            <input type="text" name="person" required />
+            <p>Введите адрес доставки:</p>
+            <input type="text" name="address" required />
+            <input type="submit" value="Отправить" />
         </form>
+        
     </div>
 </body>
 </html>

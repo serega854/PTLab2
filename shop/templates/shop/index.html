@@ -1,23 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Товары</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff8e1; /* Светлый желтый фон */
+            color: #5d3f00; /* Темный коричневый цвет текста */
+            margin: 0;
+            padding: 20px;
+        }
+        h3 {
+            text-align: center;
+            color: #ffb300; /* Ярко-желтый цвет заголовка */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ffcc00; /* Желтая граница ячеек */
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #ffeb3b; /* Светло-желтый фон для заголовков таблицы */
+        }
+        tr:nth-child(even) {
+            background-color: #fffde7; /* Очень светлый желтый фон для четных строк */
+        }
+        tr:hover {
+            background-color: #ffe082; /* Цвет при наведении на строку */
+        }
+        a {
+            color: #ff9800; /* Оранжевый цвет ссылок */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline; /* Подчеркивание ссылки при наведении */
+        }
+    </style>
 </head>
 <body>
     <div>
-        <h3>Список</h3>
+        <h3>Список товаров</h3>
         <table>
             <tr>
-                <td><p>Наименование</p></td>
-                <td><p>Цена</p></td>
-                <td></td>
+                <th>Наименование</th>
+                <th>Цена</th>
+                <th>Действие</th>
             </tr>
             {% for p in products %}
                 <tr>
-                    <td><p>{{ p.name }}</p></td>
-                    <td><p>{{ p.price }}</p></td>
-                    <td><p><a href="/buy/{{ p.id }}">Купить</a></p></td>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.price }}</td>
+                    <td><a href="/buy/{{ p.id }}">Купить</a></td>
                 </tr>
             {% endfor %}
         </table>
