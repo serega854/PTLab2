@@ -1,15 +1,18 @@
 - model: shop.product
   pk: 1
   fields:
-    name: Стол
+    name: Кактус
     price: 2000
+    quantity: 2
 - model: shop.product
   pk: 2
   fields:
-    name: Стул
+    name: Земля
     price: 1000
+    quantity: 4
 - model: shop.product
   pk: 3
   fields:
-    name: Табурет
+    name: Лопатка
     price: 500
+    quantity: 4
