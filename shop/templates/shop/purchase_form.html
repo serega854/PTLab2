@@ -50,12 +50,8 @@
     <div>
         <h3>Покупка</h3>
         <form method="post">{% csrf_token %}
-            <p>Выберите товары:</p>
-            {% for product in products %}
-                <label>
-                    <input type="checkbox" name="products" value="{{ product.id }}" /> {{ product.name }} - {{ product.price }} руб.
-                </label><br />
-            {% endfor %}
+
+          
             <p>Введите свое имя:</p>
             <input type="text" name="person" required />
             <p>Введите адрес доставки:</p>

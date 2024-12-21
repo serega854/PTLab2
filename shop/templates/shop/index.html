@@ -43,14 +43,17 @@
         }
     </style>
 </head>
-    <h1>Добро пожаловать в магазин!</h1>
-    <ul>
-        {% for product in products %}
-            <li>
-                {{ product.name }} - {{ product.price }} руб. (Количество: {{ product.quantity }})
-                <a href="{% url 'buy' product.id %}">Купить</a>
-            </li>
-        {% endfor %}
-    </ul>
+<body>
+    <div>
+        <h1>Товары</h1>
+        <ul>
+            {% for product in products %}
+                <li>
+                    {{ product.name }} - {{ product.price }} руб.  (Осталось {{ product.quantity }})
+                    <a href="{% url 'purchase_create' product.pk %}">Купить</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>
