@@ -24,7 +24,7 @@ class PurchaseCreate(View):
         address = request.POST.get('address')
 
         if not person or not address:
-            return HttpResponse('Пожалуйста, заполните все поля.', status=400) # бесполезная строка так как в инпуте не отключена настройка что можно сделать сабмит с пустой строкой
+            return HttpResponse('Пожалуйста, заполните все поля.', status=400)  # Проверка на заполнение полей
 
         # Обновление количества товара
         product.quantity -= 1
@@ -41,4 +41,5 @@ class PurchaseCreate(View):
         except Exception as e:
             return HttpResponse(f'Ошибка при создании записи: {str(e)}', status=500)
 
-        return HttpResponse(f'Спасибо за покупку, {person}!')
+        # Возвращаем статус 200 при успешной покупке
+        return HttpResponse(f'Спасибо за покупку, {person}!', status=200)  # Здесь добавлен статус 200
