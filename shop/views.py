@@ -24,7 +24,7 @@ class PurchaseCreate(View):
         address = request.POST.get('address')
 
         if not person or not address:
-            return HttpResponse('Пожалуйста, заполните все поля.', status=400)
+            return HttpResponse('Пожалуйста, заполните все поля.', status=400) # бесполезная строка так как в инпуте не отключена настройка что можно сделать сабмит с пустой строкой
 
         # Обновление количества товара
         product.quantity -= 1
