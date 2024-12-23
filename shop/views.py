@@ -1,4 +1,3 @@
-# shop/views.py
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views import View
@@ -19,21 +18,27 @@ class PurchaseCreate(View):
         product = get_object_or_404(Product, pk=product_id)
 
         if product.quantity <= 0:
-            return HttpResponse('Извините, товар закончился.')
+            return HttpResponse('Извините, товар закончился.', status=400)
 
-        person = request.POST['person']
-        address = request.POST['address']
+        person = request.POST.get('person')
+        address = request.POST.get('address')
 
-        # Update product quantity
+        if not person or not address:
+            return HttpResponse('Пожалуйста, заполните все поля.', status=400)
+
+        # Обновление количества товара
         product.quantity -= 1
 
-        # Check if quantity is less than or equal to half of original
-        if product.quantity <= product.quantity_beg / 2:  # Use integer division
-            product.price *= Decimal(1.2)  # Convert 1.2 to Decimal
-        
-        product.save()  # Save updated product
+        # Проверка на снижение цены
+        if product.quantity <= product.quantity_beg / 2:  
+            product.price *= Decimal(1.2)  
 
-        # Create a new Purchase entry
-        ShopPurchase.objects.create(person=person, address=address, product=product)
+        product.save()  # Сохранение обновленного товара
+
+        # Создание новой записи о покупке
+        try:
+            ShopPurchase.objects.create(person=person, address=address, product=product)
+        except Exception as e:
+            return HttpResponse(f'Ошибка при создании записи: {str(e)}', status=500)
 
         return HttpResponse(f'Спасибо за покупку, {person}!')

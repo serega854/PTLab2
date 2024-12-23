@@ -4,15 +4,18 @@
     name: Кактус
     price: 2000
     quantity: 2
+    quantity_beg: 2
 - model: shop.product
   pk: 2
   fields:
     name: Земля
     price: 1000
     quantity: 4
+    quantity_beg: 4
 - model: shop.product
   pk: 3
   fields:
     name: Лопатка
     price: 500
     quantity: 4
+    quantity_beg: 4
